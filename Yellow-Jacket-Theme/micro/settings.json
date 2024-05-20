@@ -1,0 +1,7 @@
+{
+    "colorscheme": "Yellow-Jacket",
+    "lsp.formatOnSave": false,
+    "lsp.ignoreMessages": "LS message1 to ignore|LS message 2 to ignore|...",
+    "lsp.ignoreTriggerCharacters": "completion,signature",
+    "lsp.server": "lua=lua-language-server, c=clangd"
+}
