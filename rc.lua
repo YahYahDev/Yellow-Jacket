@@ -4,10 +4,10 @@
 
 -- Graphics Settings
 os.execute("picom -b")
-os.execute("vibrant-cli eDP-1 1.2")
-os.execute("xgamma -rgamma 0.67")
-os.execute("xgamma -ggamma 0.67")
-os.execute("xgamma -bgamma 0.67")
+-- os.execute("vibrant-cli eDP-1 1.2")
+-- os.execute("xgamma -rgamma 0.67")
+-- os.execute("xgamma -ggamma 0.67")
+-- os.execute("xgamma -bgamma 0.67")
 
 -- Get users name
 local HUSER = io.popen("whoami")
@@ -60,11 +60,14 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+-- gears.fileststem.get_themes_dir() does not seem to be able to find custom theme so make custom path?
+if not beautiful.init("~/.config/awesome/YellowJacket.lua") then -- Custom theme in .config/awesome/theme.lua
+    beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua") -- Default theme in failed load
+end
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
-editor = os.getenv("EDITOR") or "micro"
+editor = os.getenv("EDITOR") or "micro" -- default editor for terminal
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -174,10 +177,6 @@ local tasklist_buttons = gears.table.join(
                                           end))
 
 
--- Custom Wall Paper
--- Set Absolute Path to Wallpaper
--- ::Wallpaper::
-beautiful.wallpaper = "/home/"..USER.."/.config/awesome/themes/default/WallpaperDog-20517207.jpg"
 
 local function set_wallpaper(s)
     -- Wallpaper
@@ -284,6 +283,11 @@ globalkeys = gears.table.join(
     awful.key({modkey, 			  }, "e", function () awful.spawn("/home/xirishpvp/textadept/./textadept") end,
     		  {description = "Open TextAdept:", group = "launcher"}),
 
+    awful.key({modkey, 			  }, "h", function () awful.spawn("dolphin") end,
+    		  {description = "Open Dolphin:", group = "launcher"}),
+    
+    awful.key({modkey, 			  }, "k", function () awful.spawn("krita") end,
+    		  {description = "Open Krita:", group = "launcher"}),
     		  
     -- Custom Binding End
 
@@ -492,13 +496,6 @@ clientbuttons = gears.table.join(
 root.keys(globalkeys)
 -- }}}
 
-
-
--- ::CUSTOM THEME::
-
-
-beautiful.useless_gap = 2.5
--- beautiful.border_focus = "#f0d010"
 
 
 -- {{{ Rules
